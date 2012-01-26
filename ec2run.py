@@ -54,7 +54,7 @@ AMI_IDS = {
     },
 }
 # Metadata tag name
-TAG_NAME='name'
+TAG_NAME='Name'
 # User_data script that runs when instance starts
 # NOTE: this script runs as root when the instance boots
 USER_DATA = """#!/bin/bash
@@ -76,8 +76,9 @@ def _get_user_data(**kwargs):
 def _get_conn(region):
     """Return EC2 connection
     Args:
-        region: shortname of the region to connect to
+        region: the name of region to connect to
     """
+    ### TODO: cache connection
     try:
         aws_access_key_id = environ['AWS_ACCESS_KEY_ID']
         aws_secret_access_key = environ['AWS_SECRET_ACCESS_KEY']
@@ -99,7 +100,8 @@ def _get_instances(region, **kwargs):
         filters = {'tag:{0}'.format(TAG_NAME): kwargs['name']}
     conn = _get_conn(region)
     # instances may temporarily include recently terminated instances  
-    return conn.get_all_instances(filters=filters)
+    rs = conn.get_all_instances(filters=filters)
+    return (i for r in rs for i in r.instances if i.state == u'running')    
 
 
 def run(region, count=1, type='t1.micro', sleep_time=5.0, **kwargs):
@@ -147,26 +149,25 @@ def run(region, count=1, type='t1.micro', sleep_time=5.0, **kwargs):
 def terminate(region, **kwargs):
     """Terminate instances"""
     instances = _get_instances(region, **kwargs)
+    if not instances:
+        return
     conn = _get_conn(region)
-    print('Terminating instances ...')
-    for r in instances:
-        ids = [inst.id for inst in r.instances]
-        conn.terminate_instances(ids)
+    instance_ids = [inst.id for inst in instances]
+    conn.terminate_instances(instance_ids)
 
 
 def print_status(region, requests=False, **kwargs):
     """Print the state of instances"""
-    instances = _get_instances(region, **kwargs)
+    instances = _get_instances(region, **kwargs)    
     print(region)
     if not instances:
         print('\tNone.')
-    else:
-        states = {}
-        for r in instances:
-            for inst in r.instances:
-                states[inst.state] = states.setdefault(inst.state, 0) + 1
-        for state, count in states.iteritems(): 
-            print('\t{0} {1}'.format(state, count))
+        return
+    states = {}
+    for inst in instances:
+        states[inst.state] = states.setdefault(inst.state, 0) + 1
+    for state, count in states.iteritems(): 
+        print('\t{0} {1}'.format(state, count))
 
 
 def print_hosts(region, instances=None, **kwargs):
@@ -175,17 +176,14 @@ def print_hosts(region, instances=None, **kwargs):
         region: EC2 region (optional if instances is not None)
         instances: list of instance objects
     """
+    if instances is None:
+        instances = _get_instances(region, **kwargs)
     if not instances:
-        # instances may temporarily include recently terminated instances
-        instances = [inst for r in _get_instances(region, **kwargs)
-                        for inst in r.instances if inst.state == u'running']
-    print(region)
-    if not instances:
-        print('\nNone.')
-    else:
-        for inst in instances:
-            tag_value = inst.tags.get(TAG_NAME, '')
-            print('\t{0:<15}{1}'.format(tag_value, inst.public_dns_name))
+        print('No running instances.')
+        return
+    for inst in instances:
+        tag_value = inst.tags.get(TAG_NAME, 'NONE')
+        print('\t{0:<15}{1}'.format(tag_value, inst.public_dns_name))
 
 
 def main():
