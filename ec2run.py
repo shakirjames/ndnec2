@@ -55,6 +55,7 @@ AMI_IDS = {
 }
 # Metadata tag name
 TAG_NAME='Name'
+TAG_VALUE='none' # default
 # User_data script that runs when instance starts
 # NOTE: this script runs as root when the instance boots
 USER_DATA = """#!/bin/bash
@@ -182,7 +183,7 @@ def print_hosts(region, instances=None, **kwargs):
         print('No running instances.')
         return
     for inst in instances:
-        tag_value = inst.tags.get(TAG_NAME, 'NONE')
+        tag_value = inst.tags.get(TAG_NAME, TAG_VALUE)
         print('\t{0:<15}{1}'.format(tag_value, inst.public_dns_name))
 
 
