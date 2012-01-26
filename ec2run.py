@@ -101,7 +101,7 @@ def _get_instances(region, **kwargs):
     conn = _get_conn(region)
     # instances may temporarily include recently terminated instances  
     rs = conn.get_all_instances(filters=filters)
-    return (i for r in rs for i in r.instances if i.state == u'running')    
+    return (i for r in rs for i in r.instances if i.state != u'terminated')    
 
 
 def run(region, count=1, type='t1.micro', sleep_time=5.0, **kwargs):
