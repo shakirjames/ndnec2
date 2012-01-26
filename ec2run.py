@@ -96,7 +96,7 @@ def _get_instances(region, **kwargs):
     """
     filters=None
     if kwargs.get('name', ''):
-        filters = {'tag:{}'.format(TAG_NAME): kwargs['name']}
+        filters = {'tag:{0}'.format(TAG_NAME): kwargs['name']}
     conn = _get_conn(region)
     # instances may temporarily include recently terminated instances  
     return conn.get_all_instances(filters=filters)
@@ -113,10 +113,10 @@ def run(region, count=1, type='t1.micro', sleep_time=5.0, **kwargs):
     try:
         ami_id = AMI_IDS[region][type]
     except KeyError:
-        raise ValueError('No AMI for {} in {}'.format(type, region))
+        raise ValueError('No AMI for {0} in {1}'.format(type, region))
     conn = _get_conn(region)
     # start instances
-    print('Launching {} {} in {} ...'.format(count, type, region))    
+    print('Launching {0} {1} in {2} ...'.format(count, type, region))    
     res = conn.run_instances(ami_id, 
             min_count=count,
             max_count=count,
@@ -140,7 +140,7 @@ def run(region, count=1, type='t1.micro', sleep_time=5.0, **kwargs):
         sleep(sleep_time)
         for inst in instances:
             inst.update()
-    print('\n{} instances started.'.format(ninst))
+    print('\n{0} instances started.'.format(ninst))
     print_hosts(region, instances=instances)
 
 
@@ -166,7 +166,7 @@ def print_status(region, requests=False, **kwargs):
             for inst in r.instances:
                 states[inst.state] = states.setdefault(inst.state, 0) + 1
         for state, count in states.iteritems(): 
-            print('\t{} {}'.format(state, count))
+            print('\t{0} {1}'.format(state, count))
 
 
 def print_hosts(region, instances=None, **kwargs):
@@ -185,7 +185,7 @@ def print_hosts(region, instances=None, **kwargs):
     else:
         for inst in instances:
             tag_value = inst.tags.get(TAG_NAME, '')
-            print('\t{:<15}{}'.format(tag_value, inst.public_dns_name))
+            print('\t{0:<15}{1}'.format(tag_value, inst.public_dns_name))
 
 
 def main():
@@ -259,7 +259,7 @@ def main():
         try:
             run(options.region, options.count, options.type, **kwargs)
         except ValueError as msg:
-            print('Error: {}'.format(msg))
+            print('Error: {0}'.format(msg))
 
 
 if __name__ == '__main__':
