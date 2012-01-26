@@ -16,7 +16,7 @@ from time import sleep
 from os import environ
 
 # URLs to install scripts
-STARTUP_SCRIPT = 'http://dl.dropbox.com/u/4855203/ec2-install/btonl-install'
+STARTUP_SCRIPT = 'http://bit.ly/ec2ccnx'
 # EC2 keypair
 try:
     EC2_KEYPAIR = environ['EC2_KEYPAIR']
@@ -60,13 +60,15 @@ TAG_NAME='name'
 USER_DATA = """#!/bin/bash
 set -e
 
-echo {name} {gateway} {options} >> /root/install.log 2>&1
+wget -O install {script}
+bash install {name} {gateway} {options} >> /root/install.log 2>&1
 """
 
 
 def _get_user_data(**kwargs):
     """Return startup (user_data) script"""
-    return USER_DATA.format(name=kwargs.get('name', ''),
+    return USER_DATA.format(script=STARTUP_SCRIPT,
+                            name=kwargs.get('name', ''),
                             gateway=kwargs.get('gateway', ''),
                             options=kwargs.get('options', ''))
     
