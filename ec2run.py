@@ -72,7 +72,27 @@ def _get_user_data(**kwargs):
                             name=kwargs.get('name', ''),
                             gateway=kwargs.get('gateway', ''),
                             options=kwargs.get('options', ''))
-    
+
+
+def _get_conn(region):
+    """Return EC2 connection
+    Args:
+        region: region to connect to
+    """
+    try:
+        aws_access_key_id = environ['AWS_ACCESS_KEY_ID']
+        aws_secret_access_key = environ['AWS_SECRET_ACCESS_KEY']
+    except KeyError:
+        raise ValueError('Please set your environment variables: '
+                        'AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY')
+    if region not in _get_conn.connections:
+        _get_conn.connections[region] = ec2.connect_to_region(
+                                region,
+                                aws_access_key_id=AWS_ACCESS_KEY_ID,
+                                aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+    return _get_conn.connections[region]
+_get_conn.connections = {} # connection cache ('static' variable)
+
 
 def _get_conn(region):
     """Return EC2 connection
