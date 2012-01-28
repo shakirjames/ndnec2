@@ -66,13 +66,13 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    make 
 
    cd ~
-   echo "#!/bin/sh" > ~ec2-user/restartCCNX.sh
-   echo "export CCND_LOG=/var/log/ccnd.log" >> ~ec2-user/restartCCNX.sh
-   echo "CCNX_DEBUG=7" >> ~ec2-user/restartCCNX.sh
-   echo "sudo -E /usr/local/bin/ccndstop" >> ~ec2-user/restartCCNX.sh
-   echo "sudo -E /usr/local/bin/ccndstart" >> ~ec2-user/restartCCNX.sh
-   chmod 755 ~ec2-user/restartCCNX.sh
-   chown ec2-user ~ec2-user/restartCCNX.sh
+   echo "#!/bin/sh" > /root/restartCCNX.sh
+   echo "export CCND_LOG=/var/log/ccnd.log" >> /root/restartCCNX.sh
+   echo "CCNX_DEBUG=7" >> /root/restartCCNX.sh
+   echo "sudo -E /usr/local/bin/ccndstop" >> /root/restartCCNX.sh
+   echo "sudo -E /usr/local/bin/ccndstart" >> /root/restartCCNX.sh
+   chmod 755 /root/restartCCNX.sh
+   #chown ec2-user ~ec2-user/restartCCNX.sh
 
    #echo "#!/bin/sh" > chat_thru_washu.sh
    #echo "export CCNX_USER_NAME=chat_wu" >> chat_thru_washu.sh
@@ -89,62 +89,78 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    #echo "#!/bin/sh" > home_washu.sh
    #echo "~/NDN_GEC/ccnx-dhcp/ccndhcpnode -f ~/NDN_GEC/ccnx-dhcp/ccn_dhcp_client.conf.WASHU " >> home_washu.sh
 foundgw=0
+cd /root/NDN_GEC/ccnx-dhcp
+ls
 case "$NDN_GATEWAY_NAME" in
 "PARC")
     echo "GATEWAY: PARC"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.PARC
     ;;
 "WASHU")
     echo "GATEWAY: WASHU"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.WASHU
     ;;
 "CAIDA")
     echo "GATEWAY: CAIDA"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.CAIDA
     ;;
 "CSU")
     echo "GATEWAY: CSU"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.CSU
     ;;
 "MEMPHIS")
     echo "GATEWAY: MEMPHIS"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.MEMPHIS
     ;;
 "SPPATLA")
     echo "GATEWAY: SPPATLA"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.SPPATLA
     ;;
 "SPPHOUS")
     echo "GATEWAY: SPPHOUS"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.SPPHOUS
     ;;
 "SPPKANS")
     echo "GATEWAY: SPPKANS"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.SPPKANS
     ;;
 "SPPSALT")
     echo "GATEWAY: SPPSALT"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.SPPSALT
     ;;
 "SPPWASH")
     echo "GATEWAY: SPPWASH"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.SPPWASH
     ;;
 "ARIZONA")
     echo "GATEWAY: ARIZONA"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.ARIZONA
     ;;
 "UCI")
     echo "GATEWAY: UCI"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.UIC
     ;;
 "UCLA")
     echo "GATEWAY: UCLA"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.UCLA
     ;;
 "UIUC")
     echo "GATEWAY: UIUC"
     foundgw=1
+    ./ccndhcpnode -f ccn_dhcp_client.conf.UIUC
     ;;
 esac
 
@@ -152,3 +168,29 @@ if [ $foundgw -eq 0 ]
 then
     echo "NO NDN GATEWAY found"
 fi
+
+foundapp=0
+case "$APP_NAME" in
+"robochat")
+    echo "APP: robochat"
+    foundapp=1
+    echo "ccnchat -text $APP_PARAMS"
+    ccnchat -text $APP_PARAMS
+    ;;
+"robochat_server")
+    echo "APP: robochat_server"
+    foundapp=1
+    #echo "ccnchat -text $APP_PARAMS"
+    #ccnchat -text $APP_PARAMS
+    ;;
+"vlc")
+    echo "APP: vlc"
+    foundapp=1
+    ;;
+esac
+
+if [ $foundapp -eq 0 ]
+then
+    echo "NO APP Name found"
+fi
+
