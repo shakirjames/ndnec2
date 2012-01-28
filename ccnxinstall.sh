@@ -189,6 +189,10 @@ fi
 
 foundapp=0
 case "$APP_NAME" in
+"null")
+    echo "APP: null"
+    foundapp=1
+    ;;
 "robochat")
     echo "APP: robochat"
     foundapp=1
