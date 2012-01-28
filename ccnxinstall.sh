@@ -98,71 +98,85 @@ ls
 case "$NDN_GATEWAY_NAME" in
 "PARC")
     echo "GATEWAY: PARC"
+    export CCNX_USER_NAME=chat_parc
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.PARC
     ;;
 "WASHU")
     echo "GATEWAY: WASHU"
+    export CCNX_USER_NAME=chat_washu
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.WASHU
     ;;
 "CAIDA")
     echo "GATEWAY: CAIDA"
+    export CCNX_USER_NAME=chat_caida
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.CAIDA
     ;;
 "CSU")
     echo "GATEWAY: CSU"
+    export CCNX_USER_NAME=chat_csu
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.CSU
     ;;
 "MEMPHIS")
     echo "GATEWAY: MEMPHIS"
+    export CCNX_USER_NAME=chat_memphis
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.MEMPHIS
     ;;
 "SPPATLA")
     echo "GATEWAY: SPPATLA"
+    export CCNX_USER_NAME=chat_sppatla
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.SPPATLA
     ;;
 "SPPHOUS")
     echo "GATEWAY: SPPHOUS"
+    export CCNX_USER_NAME=chat_spphous
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.SPPHOUS
     ;;
 "SPPKANS")
     echo "GATEWAY: SPPKANS"
+    export CCNX_USER_NAME=chat_sppkans
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.SPPKANS
     ;;
 "SPPSALT")
     echo "GATEWAY: SPPSALT"
+    export CCNX_USER_NAME=chat_sppsalt
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.SPPSALT
     ;;
 "SPPWASH")
     echo "GATEWAY: SPPWASH"
+    export CCNX_USER_NAME=chat_sppwash
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.SPPWASH
     ;;
 "ARIZONA")
     echo "GATEWAY: ARIZONA"
+    export CCNX_USER_NAME=chat_arizona
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.ARIZONA
     ;;
 "UCI")
     echo "GATEWAY: UCI"
+    export CCNX_USER_NAME=chat_uci
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.UIC
     ;;
 "UCLA")
     echo "GATEWAY: UCLA"
+    export CCNX_USER_NAME=chat_ucla
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.UCLA
     ;;
 "UIUC")
     echo "GATEWAY: UIUC"
+    export CCNX_USER_NAME=chat_uiuc
     foundgw=1
     ./ccndhcpnode -f ccn_dhcp_client.conf.UIUC
     ;;
