@@ -179,7 +179,7 @@ case "$APP_NAME" in
     echo "APP: robochat"
     foundapp=1
     echo "ccnchat -text $APP_PARAMS"
-    ccnchat -text $APP_PARAMS
+    /usr/local/bin/ccnchat -text $APP_PARAMS
     ;;
 "robochat_server")
     echo "APP: robochat_server"
