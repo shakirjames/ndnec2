@@ -20,6 +20,7 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
 
    gunzip NDN_GEC.tar.gz
    tar -xf NDN_GEC.tar
+   export HOME=/root
    cd /root ; /root/NDN_GEC/ccnx-0.4.2/csrc/lib/ccn_initkeystore.sh 
 
    yum -y install make
