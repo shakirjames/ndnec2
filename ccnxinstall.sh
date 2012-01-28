@@ -20,24 +20,24 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    tar -xf NDN_GEC.tar
    cd ~ ; NDN_GEC/ccnx-0.4.2/csrc/lib/ccn_initkeystore.sh 
 
-   sudo yum -y install make
+   yum -y install make
 
-   sudo yum -y install openssl
-   sudo yum -y install gcc
-   sudo rm /lib/libcrypto.so.6
-   sudo yum -y install openssl-devel
-   sudo yum -y install expat-devel
-   sudo yum -y install libpcap-devel
-   sudo yum -y install java-1.6.0-openjdk-devel
-   #sudo yum -y install ant
+   yum -y install openssl
+   yum -y install gcc
+   rm /lib/libcrypto.so.6
+   yum -y install openssl-devel
+   yum -y install expat-devel
+   yum -y install libpcap-devel
+   yum -y install java-1.6.0-openjdk-devel
+   #yum -y install ant
 
    # ANT
    cd ~/NDN_GEC
    gunzip apache-ant-1.8.2-bin.tar.gz
    tar -xf apache-ant-1.8.2-bin.tar
-   sudo mkdir /usr/local/ant /usr/local/ant/bin /usr/local/ant/lib
-   sudo cp -p -R apache-ant-1.8.2/bin/* /usr/local/ant/bin
-   sudo cp -p -R apache-ant-1.8.2/lib/* /usr/local/ant/lib
+   mkdir /usr/local/ant /usr/local/ant/bin /usr/local/ant/lib
+   cp -p -R apache-ant-1.8.2/bin/* /usr/local/ant/bin
+   cp -p -R apache-ant-1.8.2/lib/* /usr/local/ant/lib
    export ANT_HOME=/usr/local/ant
    export PATH=$PATH:$ANT_HOME/bin
    echo "PATH=$PATH"
@@ -45,7 +45,7 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    cd ~/NDN_GEC/ccnx-0.4.2
    make clean
    make all
-   sudo -E make install
+   make install
 
    cd ~/NDN_GEC/ccnx-dhcp
    make clean
