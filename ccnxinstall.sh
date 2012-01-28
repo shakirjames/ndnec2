@@ -69,8 +69,10 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    echo "#!/bin/sh" > /root/restartCCNX.sh
    echo "export CCND_LOG=/var/log/ccnd.log" >> /root/restartCCNX.sh
    echo "CCNX_DEBUG=7" >> /root/restartCCNX.sh
-   echo "sudo -E /usr/local/bin/ccndstop" >> /root/restartCCNX.sh
-   echo "sudo -E /usr/local/bin/ccndstart" >> /root/restartCCNX.sh
+   #echo "sudo -E /usr/local/bin/ccndstop" >> /root/restartCCNX.sh
+   #echo "sudo -E /usr/local/bin/ccndstart" >> /root/restartCCNX.sh
+   echo "/usr/local/bin/ccndstop" >> /root/restartCCNX.sh
+   echo "/usr/local/bin/ccndstart" >> /root/restartCCNX.sh
    chmod 755 /root/restartCCNX.sh
    /root/restartCCNX.sh 
    #chown ec2-user ~ec2-user/restartCCNX.sh
