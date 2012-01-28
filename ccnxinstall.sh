@@ -88,3 +88,67 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
 
    #echo "#!/bin/sh" > home_washu.sh
    #echo "~/NDN_GEC/ccnx-dhcp/ccndhcpnode -f ~/NDN_GEC/ccnx-dhcp/ccn_dhcp_client.conf.WASHU " >> home_washu.sh
+foundgw=0
+case "$NDN_GATEWAY_NAME" in
+"PARC")
+    echo "GATEWAY: PARC"
+    foundgw=1
+    ;;
+"WASHU")
+    echo "GATEWAY: WASHU"
+    foundgw=1
+    ;;
+"CAIDA")
+    echo "GATEWAY: CAIDA"
+    foundgw=1
+    ;;
+"CSU")
+    echo "GATEWAY: CSU"
+    foundgw=1
+    ;;
+"MEMPHIS")
+    echo "GATEWAY: MEMPHIS"
+    foundgw=1
+    ;;
+"SPPATLA")
+    echo "GATEWAY: SPPATLA"
+    foundgw=1
+    ;;
+"SPPHOUS")
+    echo "GATEWAY: SPPHOUS"
+    foundgw=1
+    ;;
+"SPPKANS")
+    echo "GATEWAY: SPPKANS"
+    foundgw=1
+    ;;
+"SPPSALT")
+    echo "GATEWAY: SPPSALT"
+    foundgw=1
+    ;;
+"SPPWASH")
+    echo "GATEWAY: SPPWASH"
+    foundgw=1
+    ;;
+"ARIZONA")
+    echo "GATEWAY: ARIZONA"
+    foundgw=1
+    ;;
+"UCI")
+    echo "GATEWAY: UCI"
+    foundgw=1
+    ;;
+"UCLA")
+    echo "GATEWAY: UCLA"
+    foundgw=1
+    ;;
+"UIUC")
+    echo "GATEWAY: UIUC"
+    foundgw=1
+    ;;
+esac
+
+if [ $foundgw -eq 0 ]
+then
+    echo "NO NDN GATEWAY found"
+fi
