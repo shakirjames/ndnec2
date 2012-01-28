@@ -14,6 +14,8 @@ echo $@
 
 ################################
 
+cd /root
+
 wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
 
    gunzip NDN_GEC.tar.gz
