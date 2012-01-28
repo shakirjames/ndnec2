@@ -166,7 +166,7 @@ case "$NDN_GATEWAY_NAME" in
     echo "GATEWAY: UCI"
     export CCNX_USER_NAME=chat_uci
     foundgw=1
-    ./ccndhcpnode -f ccn_dhcp_client.conf.UIC
+    ./ccndhcpnode -f ccn_dhcp_client.conf.UCI
     ;;
 "UCLA")
     echo "GATEWAY: UCLA"
