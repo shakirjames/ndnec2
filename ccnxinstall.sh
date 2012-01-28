@@ -72,6 +72,7 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    echo "sudo -E /usr/local/bin/ccndstop" >> /root/restartCCNX.sh
    echo "sudo -E /usr/local/bin/ccndstart" >> /root/restartCCNX.sh
    chmod 755 /root/restartCCNX.sh
+   /root/restartCCNX.sh 
    #chown ec2-user ~ec2-user/restartCCNX.sh
 
    #echo "#!/bin/sh" > chat_thru_washu.sh
@@ -88,6 +89,7 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
 
    #echo "#!/bin/sh" > home_washu.sh
    #echo "~/NDN_GEC/ccnx-dhcp/ccndhcpnode -f ~/NDN_GEC/ccnx-dhcp/ccn_dhcp_client.conf.WASHU " >> home_washu.sh
+
 foundgw=0
 cd /root/NDN_GEC/ccnx-dhcp
 ls
