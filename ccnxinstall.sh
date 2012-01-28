@@ -200,6 +200,8 @@ case "$APP_NAME" in
     foundapp=1
     #echo "ccnchat -text $APP_PARAMS"
     #ccnchat -text $APP_PARAMS
+    cd /root/NDN_GEC/robochat
+    ./chat_read.sh  < Declaration_of_Independence.txt | /usr/local/bin/ccnchat -text $APP_PARAMS
     ;;
 "vlc")
     echo "APP: vlc"
