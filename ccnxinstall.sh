@@ -199,13 +199,32 @@ case "$APP_NAME" in
     echo "ccnchat -text $APP_PARAMS"
     /usr/local/bin/ccnchat -text $APP_PARAMS
     ;;
-"robochat_server")
-    echo "APP: robochat_server"
+"robochat_server1")
+    echo "APP: robochat_server1"
     foundapp=1
     #echo "ccnchat -text $APP_PARAMS"
     #ccnchat -text $APP_PARAMS
     cd /root/NDN_GEC/robochat
+    export CCNX_USER_NAME=Declaration
     ./chat_read.sh  Declaration_of_Independence.txt | /usr/local/bin/ccnchat -text $APP_PARAMS
+    ;;
+"robochat_server2")
+    echo "APP: robochat_server2"
+    foundapp=1
+    #echo "ccnchat -text $APP_PARAMS"
+    #ccnchat -text $APP_PARAMS
+    cd /root/NDN_GEC/robochat
+    export CCNX_USER_NAME=Gettysburg
+    ./chat_read.sh  Gettysburg_Address.txt | /usr/local/bin/ccnchat -text $APP_PARAMS
+    ;;
+"robochat_server3")
+    echo "APP: robochat_server3"
+    foundapp=1
+    #echo "ccnchat -text $APP_PARAMS"
+    #ccnchat -text $APP_PARAMS
+    cd /root/NDN_GEC/robochat
+    export CCNX_USER_NAME=Preamble
+    ./chat_read.sh  Preamble_to_the_Constitution.txt | /usr/local/bin/ccnchat -text $APP_PARAMS
     ;;
 "vlc")
     echo "APP: vlc"
