@@ -148,10 +148,6 @@ def run(region, count=1, type='t1.micro', sleep_time=5.0, **kwargs):
             user_data=_get_user_data(**kwargs), 
             instance_type=type)
     instances = res.instances
-    # tag instances  
-    if kwargs.get('name', ''):
-        ids = [inst.id for inst in instances]
-        conn.create_tags( ids, {TAG_NAME: kwargs['name']})
     # wait for 'running' state
     ninst = len(instances)
     while True:
@@ -164,6 +160,10 @@ def run(region, count=1, type='t1.micro', sleep_time=5.0, **kwargs):
         for inst in instances:
             inst.update()
     print('\n{0} instances started.'.format(ninst))
+    # tag instances  
+    if kwargs.get('name', ''):
+        ids = [inst.id for inst in instances]
+        conn.create_tags( ids, {TAG_NAME: kwargs['name']})
     print_hosts(region, instances=instances)
 
 
