@@ -199,6 +199,9 @@ def print_hosts(region, instances=None, **kwargs):
     """
     if instances is None:
         instances = _get_instances(region, **kwargs)
+    else:
+        for inst in instances:
+            inst.update() # for newly added tags            
     if not instances:
         print('No running instances.')
         return
