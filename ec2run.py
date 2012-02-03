@@ -23,7 +23,7 @@ try:
 except KeyError:
     EC2_KEYPAIR = 'default'
 # EC2 security group
-EC2_SECURITY_GROUPS=('default', )
+EC2_SECURITY_GROUPS=('default', 'ccnx_client')
 # Region names (availability zones)
 REGION_US_E1 = 'us-east-1' # N. Virginia
 REGION_US_W1 = 'us-west-1' # N. California
@@ -122,7 +122,28 @@ def _get_instances(region, **kwargs):
     conn = _get_conn(region)
     # instances may temporarily include recently terminated instances  
     rs = conn.get_all_instances(filters=filters)
-    return (i for r in rs for i in r.instances if i.state != u'terminated')    
+    return [i for r in rs for i in r.instances if i.state != u'terminated']
+
+
+def _wait_for_instances(instances, state=u'running', sleep_time=5.0):
+    """Wait for instances' state to change to change state
+    Args:
+        instances: list of instance objects
+        state: instance state to wait for
+        sleep_time: poll instances every sleep_time seconds
+    """
+    # wait for 'running'
+    n = len(instances)
+    while True:
+        sys.stdout.write('.')
+        sys.stdout.flush()
+        sleep(sleep_time)
+        for ins in instances:
+            ins.update()
+        m = len([ins for ins in instances if ins.state == state])
+        if n == m:
+            break
+    print('\n')
 
 
 def run(region, count=1, type='t1.micro', sleep_time=5.0, **kwargs):
@@ -149,32 +170,26 @@ def run(region, count=1, type='t1.micro', sleep_time=5.0, **kwargs):
             instance_type=type)
     instances = res.instances
     # wait for 'running' state
-    ninst = len(instances)
-    while True:
-        print '.',
-        sys.stdout.flush()
-        nrun = len([inst for inst in instances if inst.state == u'running'])
-        if nrun == ninst:
-            break
-        sleep(sleep_time)
-        for inst in instances:
-            inst.update()
-    print('\n{0} instances started.'.format(ninst))
+    _wait_for_instances(instances)
     # tag instances  
     if kwargs.get('name', ''):
         ids = [inst.id for inst in instances]
         conn.create_tags( ids, {TAG_NAME: kwargs['name']})
+        for inst in instances:
+            inst.update() # to print with new tags
     print_hosts(region, instances=instances)
 
 
 def terminate(region, **kwargs):
     """Terminate instances"""
+    print('Terminating instances ...')
     instances = _get_instances(region, **kwargs)
     if not instances:
         return
     conn = _get_conn(region)
     instance_ids = [inst.id for inst in instances]
     conn.terminate_instances(instance_ids)
+    _wait_for_instances(instances, state=u'terminated')
 
 
 def print_status(region, requests=False, **kwargs):
@@ -199,9 +214,6 @@ def print_hosts(region, instances=None, **kwargs):
     """
     if instances is None:
         instances = _get_instances(region, **kwargs)
-    else:
-        for inst in instances:
-            inst.update() # for newly added tags            
     if not instances:
         print('No running instances.')
         return
