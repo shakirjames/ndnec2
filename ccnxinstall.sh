@@ -28,7 +28,8 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    gunzip NDN_GEC.tar.gz
    tar -xf NDN_GEC.tar
    export HOME=/root
-   cd /root ; /root/NDN_GEC/ccnx-0.4.2/csrc/lib/ccn_initkeystore.sh 
+   #cd /root ; /root/NDN_GEC/ccnx-0.4.2/csrc/lib/ccn_initkeystore.sh 
+   cd /root ; /root/NDN_GEC/ccnx/csrc/lib/ccn_initkeystore.sh 
 
    yum -y install make
 
@@ -52,7 +53,8 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    export PATH=$PATH:$ANT_HOME/bin
    echo "PATH=$PATH"
 
-   cd /root/NDN_GEC/ccnx-0.4.2
+   #cd /root/NDN_GEC/ccnx-0.4.2
+   cd /root/NDN_GEC/ccnx
    make clean
    make all
    make install
@@ -228,6 +230,14 @@ case "$APP_NAME" in
     ;;
 "vlc")
     echo "APP: vlc"
+    foundapp=1
+    ;;
+"vlc_repository")
+    echo "APP: vlc_repository"
+    foundapp=1
+    ;;
+"ccnx_repository")
+    echo "APP: ccnx_repository"
     foundapp=1
     ;;
 esac
