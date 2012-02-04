@@ -41,6 +41,7 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    yum -y install libpcap-devel
    yum -y install java-1.6.0-openjdk-devel
    #yum -y install ant
+   yum -y install asciidoc
 
    # ANT
    cd /root/NDN_GEC
