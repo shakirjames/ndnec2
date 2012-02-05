@@ -28,14 +28,24 @@ EC2_SECURITY_GROUPS=('default', 'ccnx_client')
 REGION_US_E1 = 'us-east-1' # N. Virginia
 REGION_US_W1 = 'us-west-1' # N. California
 REGION_US_W2 = 'us-west-2' # Oregon
-# Amazon Machine Images (AMIs) 
+# Amazon Linux AMI IDs
 # from http://aws.amazon.com/amazon-linux-ami/
-AMI_US_E1_32_EBS = 'ami-31814f58'
-AMI_US_E1_64_EBS = 'ami-1b814f72'
-AMI_US_W1_32_EBS = 'ami-11d68a54'
-AMI_US_W1_64_EBS = 'ami-1bd68a5e'
-AMI_US_W2_32_EBS = 'ami-38fe7308'
-AMI_US_W2_64_EBS = 'ami-30fe7300'
+# AMI_US_E1_32_EBS = 'ami-31814f58'
+# AMI_US_E1_64_EBS = 'ami-1b814f72'
+# AMI_US_W1_32_EBS = 'ami-11d68a54'
+# AMI_US_W1_64_EBS = 'ami-1bd68a5e'
+# AMI_US_W2_32_EBS = 'ami-38fe7308'
+# AMI_US_W2_64_EBS = 'ami-30fe7300'
+
+# Ubuntu 10.04 LTS Lucid (EBS boot) AMIs
+# from http://alestic.com/
+AMI_US_E1_32_EBS = 'ami-71dc0b18'
+AMI_US_E1_64_EBS = 'ami-55dc0b3c'
+AMI_US_W1_32_EBS = 'ami-9991cfdc'
+AMI_US_W1_64_EBS = 'ami-a191cfe4'
+AMI_US_W2_32_EBS = 'ami-8cb33ebc'
+AMI_US_W2_64_EBS = 'ami-8eb33ebe'
+
 AMI_IDS = {
     REGION_US_E1: { 
         't1.micro': AMI_US_E1_64_EBS, # EBS only (32-bit or 64-bit)
