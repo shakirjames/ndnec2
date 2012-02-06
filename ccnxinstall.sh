@@ -77,6 +77,13 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    make clean
    make all
    make install
+   if [ $APP_NAME = "vlc" ]
+   then
+     cd /root/NDN_GEC/ccnx/apps/vlc
+     cp -p Makefile.Linux Makefile
+     make
+     make install
+   fi
 
    cd /root/NDN_GEC/ccnx-dhcp
    make clean
