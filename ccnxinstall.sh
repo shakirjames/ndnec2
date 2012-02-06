@@ -31,17 +31,21 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    #cd /root ; /root/NDN_GEC/ccnx-0.4.2/csrc/lib/ccn_initkeystore.sh 
    cd /root ; /root/NDN_GEC/ccnx/csrc/lib/ccn_initkeystore.sh 
 
-   yum -y install make
+   if [ $APP_NAME = "vlc" ]
+   then
+   else
+     yum -y install make
 
-   yum -y install openssl
-   yum -y install gcc
-   rm /lib/libcrypto.so.6
-   yum -y install openssl-devel
-   yum -y install expat-devel
-   yum -y install libpcap-devel
-   yum -y install java-1.6.0-openjdk-devel
-   #yum -y install ant
-   yum -y install asciidoc
+     yum -y install openssl
+     yum -y install gcc
+     rm /lib/libcrypto.so.6
+     yum -y install openssl-devel
+     yum -y install expat-devel
+     yum -y install libpcap-devel
+     yum -y install java-1.6.0-openjdk-devel
+     #yum -y install ant
+     yum -y install asciidoc
+   fi
 
    # ANT
    cd /root/NDN_GEC
