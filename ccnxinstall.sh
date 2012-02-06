@@ -101,7 +101,7 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    #echo "sudo -E /usr/local/bin/ccndstart" >> /root/restartCCNX.sh
    echo "/usr/local/bin/ccndstop" >> /root/restartCCNX.sh
    echo "/usr/local/bin/ccndstart" >> /root/restartCCNX.sh
-   if [ $APP_NAME = "ccnx_respository" ]
+   if [ $APP_NAME = "ccnx_repository" ]
    then
      echo "export CCNR_DIRECTORY=/usr/local/CCNX_REPO" >> /root/restartCCNX.sh
      echo "export CCNR_LOG=/var/log/ccnr.log" >> /root/restartCCNX.sh
