@@ -46,6 +46,7 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
       apt-get -y install libpcap-dev
       apt-get -y install asciidoc
       apt-get -y install vlc
+      apt-get -y install libvlc-dev
    else
      yum -y install make
 
