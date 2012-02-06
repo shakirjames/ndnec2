@@ -34,9 +34,9 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    #cd /root ; /root/NDN_GEC/ccnx-0.4.2/csrc/lib/ccn_initkeystore.sh 
    cd /root ; /root/NDN_GEC/ccnx/csrc/lib/ccn_initkeystore.sh 
 
-   if [ $APP_NAME = "vlc" ]
-   then
-      echo "VLC:"
+#   if [ $APP_NAME = "vlc" ]
+#   then
+#      echo "VLC:"
       apt-get -y update
       apt-get -y install gcc
       apt-get -y install openjdk-6-jre
@@ -47,19 +47,19 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
       apt-get -y install asciidoc
       apt-get -y install vlc
       apt-get -y install libvlc-dev
-   else
-     yum -y install make
-
-     yum -y install openssl
-     yum -y install gcc
-     rm /lib/libcrypto.so.6
-     yum -y install openssl-devel
-     yum -y install expat-devel
-     yum -y install libpcap-devel
-     yum -y install java-1.6.0-openjdk-devel
-     #yum -y install ant
-     yum -y install asciidoc
-   fi
+#   else
+#     yum -y install make
+#
+#     yum -y install openssl
+#     yum -y install gcc
+#     rm /lib/libcrypto.so.6
+#     yum -y install openssl-devel
+#     yum -y install expat-devel
+#     yum -y install libpcap-devel
+#     yum -y install java-1.6.0-openjdk-devel
+#     #yum -y install ant
+#     yum -y install asciidoc
+#   fi
 
    # ANT
    cd /root/NDN_GEC
@@ -256,10 +256,6 @@ case "$APP_NAME" in
     ;;
 "vlc")
     echo "APP: vlc"
-    foundapp=1
-    ;;
-"vlc_repository")
-    echo "APP: vlc_repository"
     foundapp=1
     ;;
 "ccnx_repository")
