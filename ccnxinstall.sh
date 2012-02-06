@@ -40,6 +40,7 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
       apt-get -y update
       apt-get -y install gcc
       apt-get -y install openjdk-6-jre
+      apt-get -y install openjdk-6-jdk
       apt-get -y install libssl-dev
       apt-get -y install libexpat-dev
       apt-get -y install libpcap-dev
