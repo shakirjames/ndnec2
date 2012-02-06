@@ -33,7 +33,7 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
 
    if [ $APP_NAME = "vlc" ]
    then
-      ;
+      echo "VLC:"
    else
      yum -y install make
 
