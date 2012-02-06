@@ -10,6 +10,7 @@
 # See LICENSE for details.
 #
 
+echo "Usage: $0 $@"
 echo $@
 
 ################################
@@ -34,6 +35,8 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
    if [ $APP_NAME = "vlc" ]
    then
       echo "VLC:"
+      apt-get update
+      apt-get install gcc
    else
      yum -y install make
 
