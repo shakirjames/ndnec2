@@ -10,6 +10,8 @@
 # See LICENSE for details.
 #
 
+PWD=`pwd`
+echo "PWD: $PWD"
 echo "Usage: $0 $@"
 echo $@
 
