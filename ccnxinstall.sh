@@ -37,6 +37,7 @@ wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
       echo "VLC:"
       apt-get update
       apt-get install gcc
+      apt-get install openjdk-6-jre
    else
      yum -y install make
 
