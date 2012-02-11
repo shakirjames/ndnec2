@@ -25,6 +25,7 @@ echo "NDN_GATEWAY_NAME = $NDN_GATEWAY_NAME"
 echo "APP_PARAMS = $APP_PARAMS"
 
 cd /root
+wget http://s3.amazonaws.com/ec2-downloads/ec2-ami-tools.zip
 
 wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
 
