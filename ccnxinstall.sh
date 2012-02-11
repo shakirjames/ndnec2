@@ -25,7 +25,11 @@ echo "NDN_GATEWAY_NAME = $NDN_GATEWAY_NAME"
 echo "APP_PARAMS = $APP_PARAMS"
 
 cd /root
+
+# install EC2 AMI tools and required utilities
 wget http://s3.amazonaws.com/ec2-downloads/ec2-ami-tools.zip
+apt-get -y install ruby
+apt-get -y install libopenssl-ruby
 
 wget http://www.arl.wustl.edu/~jdd/NDN/NDN_GEC.tar.gz
 
