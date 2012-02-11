@@ -28,6 +28,7 @@ cd /root
 
 # install EC2 AMI tools and required utilities
 wget http://s3.amazonaws.com/ec2-downloads/ec2-ami-tools.zip
+apt-get -y install unzip
 apt-get -y install ruby
 apt-get -y install libopenssl-ruby
 
