@@ -139,85 +139,85 @@ case "$NDN_GATEWAY_NAME" in
     echo "GATEWAY: PARC"
     export CCNX_USER_NAME=chat_parc
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "WASHU")
     echo "GATEWAY: WASHU"
     export CCNX_USER_NAME=chat_washu
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "CAIDA")
     echo "GATEWAY: CAIDA"
     export CCNX_USER_NAME=chat_caida
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "CSU")
     echo "GATEWAY: CSU"
     export CCNX_USER_NAME=chat_csu
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "MEMPHIS")
     echo "GATEWAY: MEMPHIS"
     export CCNX_USER_NAME=chat_memphis
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "SPPATLA")
     echo "GATEWAY: SPPATLA"
     export CCNX_USER_NAME=chat_sppatla
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "SPPHOUS")
     echo "GATEWAY: SPPHOUS"
     export CCNX_USER_NAME=chat_spphous
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "SPPKANS")
     echo "GATEWAY: SPPKANS"
     export CCNX_USER_NAME=chat_sppkans
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "SPPSALT")
     echo "GATEWAY: SPPSALT"
     export CCNX_USER_NAME=chat_sppsalt
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "SPPWASH")
     echo "GATEWAY: SPPWASH"
     export CCNX_USER_NAME=chat_sppwash
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "ARIZONA")
     echo "GATEWAY: ARIZONA"
     export CCNX_USER_NAME=chat_arizona
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "UCI")
     echo "GATEWAY: UCI"
     export CCNX_USER_NAME=chat_uci
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "UCLA")
     echo "GATEWAY: UCLA"
     export CCNX_USER_NAME=chat_ucla
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "UIUC")
     echo "GATEWAY: UIUC"
     export CCNX_USER_NAME=chat_uiuc
     foundgw=1
-    /home/ubuntu/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 esac
 
@@ -225,7 +225,7 @@ if [ $foundgw -eq 0 ]
 then
     echo "NO NDN GATEWAY >$NDN_GATEWAY_NAME< found"
     echo "Starting ccnx without one"
-    /home/ubuntu/restartCCNX.sh "NONE" 
+    /root/restartCCNX.sh "NONE" 
 fi
 
 foundapp=0
