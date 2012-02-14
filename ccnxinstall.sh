@@ -37,8 +37,9 @@ echo "APP_PARAMS = $APP_PARAMS"
 #   gunzip NDN_GEC.tar.gz
 #   tar -xf NDN_GEC.tar
 #   export HOME=/root
-#   #cd /root ; /root/NDN_GEC/ccnx-0.4.2/csrc/lib/ccn_initkeystore.sh 
-#   cd /root ; /root/NDN_GEC/ccnx/csrc/lib/ccn_initkeystore.sh 
+   #cd /root ; /root/NDN_GEC/ccnx-0.4.2/csrc/lib/ccn_initkeystore.sh 
+cd /root ; /root/NDN_GEC/ccnx/csrc/lib/ccn_initkeystore.sh 
+
 #
 ##   if [ $APP_NAME = "vlc" ]
 ##   then
