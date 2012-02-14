@@ -133,8 +133,6 @@ echo "APP_PARAMS = $APP_PARAMS"
 #   #echo "~/NDN_GEC/ccnx-dhcp/ccndhcpnode -f ~/NDN_GEC/ccnx-dhcp/ccn_dhcp_client.conf.WASHU " >> home_washu.sh
 #
 foundgw=0
-cd /root/NDN_GEC/ccnx-dhcp
-ls
 case "$NDN_GATEWAY_NAME" in
 "PARC")
     echo "GATEWAY: PARC"
