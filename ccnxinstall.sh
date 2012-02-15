@@ -39,6 +39,7 @@ echo "APP_PARAMS = $APP_PARAMS"
 #   export HOME=/root
    #cd /root ; /root/NDN_GEC/ccnx-0.4.2/csrc/lib/ccn_initkeystore.sh 
 echo "STARTing generation of /root/.ccnx/keystore"
+export HOME=/root
 cd /root ; /root/NDN_GEC/ccnx/csrc/lib/ccn_initkeystore.sh 
 echo "DONE with generation of /root/.ccnx/keystore"
 
