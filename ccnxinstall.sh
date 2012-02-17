@@ -273,7 +273,7 @@ case "$APP_NAME" in
 "vlc")
     echo "APP: vlc"
     foundapp=1
-    vlc -I dummy --play-and-exit --no-video ccnx:///ndn/wustl.edu/REPO/hindenberg_explodes.mpeg
+    vlc -I dummy --play-and-exit --no-video $APP_PARAMS
     ;;
 "ccnx_repository")
     echo "APP: ccnx_repository"
