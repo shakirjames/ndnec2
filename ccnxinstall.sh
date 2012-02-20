@@ -284,8 +284,10 @@ case "$APP_NAME" in
     mkdir -p /usr/local/NDN/REPO
     if [ "$CCNR_LOG" = "" ]
     then
+      echo "Starting ccnr with no log file"
       /usr/local/bin/ccnr  &
     else
+      echo "Starting ccnr with log file: $CCNR_LOG"
       : >"$CCNR_LOG" || exit 1
       /usr/local/bin/ccnr  2> $CCNR_LOG &
     fi
