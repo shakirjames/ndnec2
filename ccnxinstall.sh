@@ -17,8 +17,10 @@ echo $@
 
 ################################
 APP_NAME=$1
-NDN_GATEWAY_NAME=$2
-APP_PARAMS="$3"
+shift 1
+NDN_GATEWAY_NAME=$1
+shift 1
+APP_PARAMS="$*"
 
 echo "APP_NAME = $APP_NAME"
 echo "NDN_GATEWAY_NAME = $NDN_GATEWAY_NAME"
