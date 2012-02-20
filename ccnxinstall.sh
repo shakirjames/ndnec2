@@ -277,6 +277,30 @@ case "$APP_NAME" in
     ;;
 "ccnx_repository")
     echo "APP: ccnx_repository"
+    export CCNR_LOG=/var/log/ccnr.log
+    export CCNR_DEBUG=7
+    export CCNR_DIRECTORY=/usr/local/NDN/REPO
+
+    if [ "$CCNR_LOG" = "" ]
+    then
+      /usr/local/bin/ccnr  &
+    else
+      : >"$CCNR_LOG" || exit 1
+      /usr/local/bin/ccnr  2> $CCNR_LOG &
+    fi
+
+    wget http://www.arl.wustl.edu/~jdd/NDN/videos.tgz
+    tar -zxf videos.tgz
+
+    #FILES=`ls *.mpeg`
+
+    #for f in $FILES
+    #do
+    #  echo "FILE: $f"
+    #  #ccnputfile ccnx:/REPO_CSU_UDP_01/$f $f
+    #  #ccnputfile ccnx:/REPO_CSU_TCP_01/$f $f
+    #done
+
     foundapp=1
     ;;
 esac
