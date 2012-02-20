@@ -290,17 +290,20 @@ case "$APP_NAME" in
       /usr/local/bin/ccnr  2> $CCNR_LOG &
     fi
 
+    mkdir VIDEOS
+    cd VIDEOS
     wget http://www.arl.wustl.edu/~jdd/NDN/videos.tgz
     tar -zxf videos.tgz
 
-    #FILES=`ls *.mpeg`
+    FILES=`ls *.mpeg`
 
-    #for f in $FILES
-    #do
-    #  echo "FILE: $f"
-    #  #ccnputfile ccnx:/REPO_CSU_UDP_01/$f $f
-    #  #ccnputfile ccnx:/REPO_CSU_TCP_01/$f $f
-    #done
+    for a in $APP_PARAMS
+      for f in $FILES
+      do
+        echo "FILE: $f"
+        ccnputfile ccnx:/$a/$f $f
+      done
+    done
 
     foundapp=1
     ;;
