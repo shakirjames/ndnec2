@@ -281,6 +281,7 @@ case "$APP_NAME" in
     export CCNR_DEBUG=7
     export CCNR_DIRECTORY=/usr/local/NDN/REPO
 
+    mkdir -p /usr/local/NDN/REPO
     if [ "$CCNR_LOG" = "" ]
     then
       /usr/local/bin/ccnr  &
