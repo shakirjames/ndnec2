@@ -298,6 +298,7 @@ case "$APP_NAME" in
     FILES=`ls *.mpeg`
 
     for a in $APP_PARAMS
+    do
       for f in $FILES
       do
         echo "FILE: $f"
