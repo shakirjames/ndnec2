@@ -308,6 +308,7 @@ case "$APP_NAME" in
       done
     done
 
+    echo "done putting files in repositories"
     foundapp=1
     ;;
 esac
@@ -317,3 +318,5 @@ then
     echo "NO APP Name found"
 fi
 
+echo ""
+echo "DONE"
