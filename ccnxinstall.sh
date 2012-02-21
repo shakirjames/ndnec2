@@ -221,6 +221,12 @@ case "$NDN_GATEWAY_NAME" in
     foundgw=1
     /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
+"REMAP")
+    echo "GATEWAY: REMAP"
+    export CCNX_USER_NAME=chat_remap
+    foundgw=1
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    ;;
 "UIUC")
     echo "GATEWAY: UIUC"
     export CCNX_USER_NAME=chat_uiuc
