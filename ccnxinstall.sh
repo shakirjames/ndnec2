@@ -138,91 +138,94 @@ echo "DONE with generation of /root/.ccnx/keystore"
 #   #echo "#!/bin/sh" > home_washu.sh
 #   #echo "~/NDN_GEC/ccnx-dhcp/ccndhcpnode -f ~/NDN_GEC/ccnx-dhcp/ccn_dhcp_client.conf.WASHU " >> home_washu.sh
 #
+cd /root
+wget http://www.arl.wustl.edu/~jdd/NDN/new_restartCCNX.sh
+chmod 755 new_restartCCNX.sh
 foundgw=0
 case "$NDN_GATEWAY_NAME" in
 "PARC")
     echo "GATEWAY: PARC"
     export CCNX_USER_NAME=chat_parc
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "WASHU")
     echo "GATEWAY: WASHU"
     export CCNX_USER_NAME=chat_washu
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "CAIDA")
     echo "GATEWAY: CAIDA"
     export CCNX_USER_NAME=chat_caida
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "CSU")
     echo "GATEWAY: CSU"
     export CCNX_USER_NAME=chat_csu
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "MEMPHIS")
     echo "GATEWAY: MEMPHIS"
     export CCNX_USER_NAME=chat_memphis
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "SPPATLA")
     echo "GATEWAY: SPPATLA"
     export CCNX_USER_NAME=chat_sppatla
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "SPPHOUS")
     echo "GATEWAY: SPPHOUS"
     export CCNX_USER_NAME=chat_spphous
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "SPPKANS")
     echo "GATEWAY: SPPKANS"
     export CCNX_USER_NAME=chat_sppkans
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "SPPSALT")
     echo "GATEWAY: SPPSALT"
     export CCNX_USER_NAME=chat_sppsalt
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "SPPWASH")
     echo "GATEWAY: SPPWASH"
     export CCNX_USER_NAME=chat_sppwash
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "ARIZONA")
     echo "GATEWAY: ARIZONA"
     export CCNX_USER_NAME=chat_arizona
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "UCI")
     echo "GATEWAY: UCI"
     export CCNX_USER_NAME=chat_uci
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "UCLA")
     echo "GATEWAY: UCLA"
     export CCNX_USER_NAME=chat_ucla
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 "UIUC")
     echo "GATEWAY: UIUC"
     export CCNX_USER_NAME=chat_uiuc
     foundgw=1
-    /root/restartCCNX.sh "$NDN_GATEWAY_NAME" 
+    /root/new_restartCCNX.sh "$NDN_GATEWAY_NAME" 
     ;;
 esac
 
@@ -230,7 +233,7 @@ if [ $foundgw -eq 0 ]
 then
     echo "NO NDN GATEWAY >$NDN_GATEWAY_NAME< found"
     echo "Starting ccnx without one"
-    /root/restartCCNX.sh "NONE" 
+    /root/new_restartCCNX.sh "NONE" 
 fi
 
 foundapp=0
@@ -294,6 +297,7 @@ case "$APP_NAME" in
       /usr/local/bin/ccnr  2> $CCNR_LOG &
     fi
 
+    cd /root
     mkdir VIDEOS
     cd VIDEOS
     wget http://www.arl.wustl.edu/~jdd/NDN/videos.tgz
