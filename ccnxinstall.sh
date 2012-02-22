@@ -253,6 +253,16 @@ case "$APP_NAME" in
     foundapp=1
     echo "ccnchat -text $APP_PARAMS"
     /usr/local/bin/ccnchat -text $APP_PARAMS
+
+    echo "#!/bin/sh" > /home/ubuntu/startApp.sh
+    echo ""          >> /home/ubuntu/startApp.sh
+    echo "export CCNX_USER_NAME=$CCNX_USER_NAME"    >> /home/ubuntu/startApp.sh
+    echo "/usr/local/bin/ccnchat -text $APP_PARAMS" >> /home/ubuntu/startApp.sh
+    echo ""
+
+    chmod 755 /home/ubuntu/startApp.sh
+    chown ubuntu.ubuntu /home/ubuntu/startApp.sh
+
     ;;
 "robochat_server1")
     echo "APP: robochat_server1"
@@ -262,6 +272,24 @@ case "$APP_NAME" in
     cd /root/NDN_GEC/robochat
     export CCNX_USER_NAME=Declaration
     ./chat_read.sh  Declaration_of_Independence.txt | /usr/local/bin/ccnchat -text $APP_PARAMS
+
+    CHAT_FILE="Declaration_of_Independence.txt"
+    echo "#!/bin/sh" > /home/ubuntu/startApp.sh
+    echo ""          >> /home/ubuntu/startApp.sh
+    echo "export CCNX_USER_NAME=$CCNX_USER_NAME"    >> /home/ubuntu/startApp.sh
+    echo "/home/ubuntu/chat_read.sh $CHAT_FILE | /usr/local/bin/ccnchat -text $APP_PARAMS" >> /home/ubuntu/startApp.sh
+    echo ""
+
+    cd /root/NDN_GEC/robochat
+    cp $CHAT_FILE /home/ubuntu
+    cp chat_read.sh /home/ubuntu
+    chmod 755 /home/ubuntu/chat_read.sh
+    chmod 644 /home/ubuntu/$CHAT_FILE
+    chown ubuntu.ubuntu /home/ubuntu/chat_read.sh /home/ubuntu/$CHAT_FILE
+
+    chmod 755 /home/ubuntu/startApp.sh
+    chown ubuntu.ubuntu /home/ubuntu/startApp.sh
+
     ;;
 "robochat_server2")
     echo "APP: robochat_server2"
@@ -271,6 +299,24 @@ case "$APP_NAME" in
     cd /root/NDN_GEC/robochat
     export CCNX_USER_NAME=Gettysburg
     ./chat_read.sh  Gettysburg_Address.txt | /usr/local/bin/ccnchat -text $APP_PARAMS
+
+    CHAT_FILE="Gettysburg_Address.txt"
+    echo "#!/bin/sh" > /home/ubuntu/startApp.sh
+    echo ""          >> /home/ubuntu/startApp.sh
+    echo "export CCNX_USER_NAME=$CCNX_USER_NAME"    >> /home/ubuntu/startApp.sh
+    echo "/home/ubuntu/chat_read.sh $CHAT_FILE | /usr/local/bin/ccnchat -text $APP_PARAMS" >> /home/ubuntu/startApp.sh
+    echo ""
+
+    cd /root/NDN_GEC/robochat
+    cp $CHAT_FILE /home/ubuntu
+    cp chat_read.sh /home/ubuntu
+    chmod 755 /home/ubuntu/chat_read.sh
+    chmod 644 /home/ubuntu/$CHAT_FILE
+    chown ubuntu.ubuntu /home/ubuntu/chat_read.sh /home/ubuntu/$CHAT_FILE
+    
+    chmod 755 /home/ubuntu/startApp.sh
+    chown ubuntu.ubuntu /home/ubuntu/startApp.sh
+
     ;;
 "robochat_server3")
     echo "APP: robochat_server3"
@@ -280,11 +326,37 @@ case "$APP_NAME" in
     cd /root/NDN_GEC/robochat
     export CCNX_USER_NAME=Preamble
     ./chat_read.sh  Preamble_to_the_Constitution.txt | /usr/local/bin/ccnchat -text $APP_PARAMS
+
+    CHAT_FILE="Preamble_to_the_Constitution.txt"
+    echo "#!/bin/sh" > /home/ubuntu/startApp.sh
+    echo ""          >> /home/ubuntu/startApp.sh
+    echo "export CCNX_USER_NAME=$CCNX_USER_NAME"    >> /home/ubuntu/startApp.sh
+    echo "/home/ubuntu/chat_read.sh $CHAT_FILE | /usr/local/bin/ccnchat -text $APP_PARAMS" >> /home/ubuntu/startApp.sh
+    echo ""
+
+    cd /root/NDN_GEC/robochat
+    cp $CHAT_FILE /home/ubuntu
+    cp chat_read.sh /home/ubuntu
+    chmod 755 /home/ubuntu/chat_read.sh
+    chmod 644 /home/ubuntu/$CHAT_FILE
+    chown ubuntu.ubuntu /home/ubuntu/chat_read.sh /home/ubuntu/$CHAT_FILE
+    
+    chmod 755 /home/ubuntu/startApp.sh
+    chown ubuntu.ubuntu /home/ubuntu/startApp.sh
+
     ;;
 "vlc")
     echo "APP: vlc"
     foundapp=1
     vlc -I dummy --play-and-exit --no-video $APP_PARAMS
+
+    echo "#!/bin/sh" > /home/ubuntu/startApp.sh
+    echo ""          >> /home/ubuntu/startApp.sh
+    echo "vlc -I dummy --plan-and-exit --no-video $APP_PARAMS" >> /home/ubuntu/startApp.sh
+    echo ""
+
+    chmod 755 /home/ubuntu/startApp.sh
+    chown ubuntu.ubuntu /home/ubuntu/startApp.sh
     ;;
 "ccnx_repository")
     echo "APP: ccnx_repository"
@@ -321,6 +393,12 @@ case "$APP_NAME" in
     done
 
     echo "done putting files in repositories"
+
+    echo "#!/bin/sh" > /home/ubuntu/startApp.sh
+    echo ""          >> /home/ubuntu/startApp.sh
+    chmod 755 /home/ubuntu/startApp.sh
+    chown ubuntu.ubuntu /home/ubuntu/startApp.sh
+
     foundapp=1
     ;;
 esac
