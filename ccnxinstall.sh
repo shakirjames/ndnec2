@@ -381,7 +381,7 @@ case "$APP_NAME" in
     wget http://www.arl.wustl.edu/~jdd/NDN/videos.tgz
     tar -zxf videos.tgz
 
-    FILES=`ls *.mpeg`
+    FILES=`ls *.mpeg *.mpg`
 
     for a in $APP_PARAMS
     do
