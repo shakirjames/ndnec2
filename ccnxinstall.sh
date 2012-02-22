@@ -271,7 +271,7 @@ case "$APP_NAME" in
     #ccnchat -text $APP_PARAMS
     cd /root/NDN_GEC/robochat
     export CCNX_USER_NAME=Declaration
-    ./chat_read.sh  Declaration_of_Independence.txt | /usr/local/bin/ccnchat -text $APP_PARAMS
+    #./chat_read.sh  Declaration_of_Independence.txt | /usr/local/bin/ccnchat -text $APP_PARAMS
 
     CHAT_FILE="Declaration_of_Independence.txt"
     echo "#!/bin/sh" > /home/ubuntu/startApp.sh
@@ -298,7 +298,7 @@ case "$APP_NAME" in
     #ccnchat -text $APP_PARAMS
     cd /root/NDN_GEC/robochat
     export CCNX_USER_NAME=Gettysburg
-    ./chat_read.sh  Gettysburg_Address.txt | /usr/local/bin/ccnchat -text $APP_PARAMS
+    #./chat_read.sh  Gettysburg_Address.txt | /usr/local/bin/ccnchat -text $APP_PARAMS
 
     CHAT_FILE="Gettysburg_Address.txt"
     echo "#!/bin/sh" > /home/ubuntu/startApp.sh
@@ -325,7 +325,7 @@ case "$APP_NAME" in
     #ccnchat -text $APP_PARAMS
     cd /root/NDN_GEC/robochat
     export CCNX_USER_NAME=Preamble
-    ./chat_read.sh  Preamble_to_the_Constitution.txt | /usr/local/bin/ccnchat -text $APP_PARAMS
+    #./chat_read.sh  Preamble_to_the_Constitution.txt | /usr/local/bin/ccnchat -text $APP_PARAMS
 
     CHAT_FILE="Preamble_to_the_Constitution.txt"
     echo "#!/bin/sh" > /home/ubuntu/startApp.sh
