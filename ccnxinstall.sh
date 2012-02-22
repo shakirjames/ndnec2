@@ -396,6 +396,7 @@ case "$APP_NAME" in
 
     echo "#!/bin/sh" > /home/ubuntu/startApp.sh
     echo ""          >> /home/ubuntu/startApp.sh
+    echo "# This file intentionally left blank. No App to run for a repository instance"          >> /home/ubuntu/startApp.sh
     chmod 755 /home/ubuntu/startApp.sh
     chown ubuntu.ubuntu /home/ubuntu/startApp.sh
 
