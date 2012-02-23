@@ -251,8 +251,8 @@ case "$APP_NAME" in
 "robochat")
     echo "APP: robochat"
     foundapp=1
-    echo "ccnchat -text $APP_PARAMS"
-    /usr/local/bin/ccnchat -text $APP_PARAMS
+    #echo "ccnchat -text $APP_PARAMS"
+    #/usr/local/bin/ccnchat -text $APP_PARAMS
 
     echo "#!/bin/sh" > /home/ubuntu/startApp.sh
     echo ""          >> /home/ubuntu/startApp.sh
