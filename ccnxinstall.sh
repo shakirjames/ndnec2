@@ -383,12 +383,14 @@ case "$APP_NAME" in
 
     FILES=`ls *.mpeg *.mpg`
 
+    # APP_PARAMS should contain prefix or prefixes for the Repository
+    #   for example: ccnx:/GEC/WASHU/REPO or ccnx:/ndn/memphis.edu/netlab/GECREPO ...
     for a in $APP_PARAMS
     do
       for f in $FILES
       do
         echo "FILE: $f"
-        ccnputfile ccnx:/$a/$f $f
+        ccnputfile $a/$f $f
       done
     done
 
