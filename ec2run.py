@@ -12,7 +12,7 @@
 
 import sys
 from boto import ec2
-from time import sleep
+from time import sleep, time
 from os import environ
 
 # URLs to install scripts
@@ -63,6 +63,10 @@ AMI_IDS = {
         'm1.large': AMI_US_W2_64_EBS, 
     },
 }
+# Poll for instance updates every POLL seconds
+WAIT_POLL=5
+# Stop polling for instances after TIMEOUT seconds
+WAIT_TIMEOUT=20
 # Metadata tag name
 TAG_NAME='Name'
 TAG_VALUE='none' # default
@@ -135,19 +139,25 @@ def _get_instances(region, **kwargs):
     return [i for r in rs for i in r.instances if i.state != u'terminated']
 
 
-def _wait_for_instances(instances, state=u'running', sleep_time=5.0):
+def _wait_for_instances(instances, state=u'running', **kwargs):
     """Wait for instances' state to change to change state
     Args:
         instances: list of instance objects
         state: instance state to wait for
-        sleep_time: poll instances every sleep_time seconds
+        poll: poll instances every poll seconds
+        timeout: stop polling after timeout seconds
     """
     # wait for 'running'
     n = len(instances)
+    poll = kwargs.get('poll', WAIT_POLL)
+    timeout = kwargs.get('timeout', WAIT_TIMEOUT)
+    start_time = time()
     while True:
+        if (time() - start_time) > timeout:
+            break
         sys.stdout.write('.')
         sys.stdout.flush()
-        sleep(sleep_time)
+        sleep(poll)
         for ins in instances:
             ins.update()
         m = len([ins for ins in instances if ins.state == state])
@@ -156,13 +166,12 @@ def _wait_for_instances(instances, state=u'running', sleep_time=5.0):
     print('\n')
 
 
-def run(region, count=1, type='t1.micro', sleep_time=5.0, **kwargs):
+def run(region=REGION_US_E1, count=1, type='t1.micro', **kwargs):
     """Run EC2 instance 
     Args:
       region: EC2 region
       count: number of instances to start
       type:  instance type
-      sleep_time: poll for 'running' instance in sleep_time seconds
     """
     try:
         ami_id = AMI_IDS[region][type]
@@ -180,17 +189,17 @@ def run(region, count=1, type='t1.micro', sleep_time=5.0, **kwargs):
             instance_type=type)
     instances = res.instances
     # wait for 'running' state
-    _wait_for_instances(instances)
+    _wait_for_instances(instances, **kwargs)
     # tag instances  
     if kwargs.get('name', ''):
         ids = [inst.id for inst in instances]
         conn.create_tags( ids, {TAG_NAME: kwargs['name']})
         for inst in instances:
             inst.update() # to print with new tags
-    print_hosts(region, instances=instances)
+    print_hosts(region, instances=instances, **kwargs)
 
 
-def terminate(region, **kwargs):
+def terminate(region=REGION_US_E1, **kwargs):
     """Terminate instances"""
     print('Terminating instances ...')
     instances = _get_instances(region, **kwargs)
@@ -199,10 +208,10 @@ def terminate(region, **kwargs):
     conn = _get_conn(region)
     instance_ids = [inst.id for inst in instances]
     conn.terminate_instances(instance_ids)
-    _wait_for_instances(instances, state=u'terminated')
+    _wait_for_instances(instances, state=u'terminated', **kwargs)
 
 
-def print_status(region, requests=False, **kwargs):
+def print_status(region=REGION_US_E1, requests=False, **kwargs):
     """Print the state of instances"""
     instances = _get_instances(region, **kwargs)    
     print(region)
@@ -216,7 +225,7 @@ def print_status(region, requests=False, **kwargs):
         print('\t{0} {1}'.format(state, count))
 
 
-def print_hosts(region, instances=None, **kwargs):
+def print_hosts(region=REGION_US_E1, instances=None, **kwargs):
     """Print hostnames of running instances
     Args:
         region: EC2 region (optional if instances is not None)
@@ -269,6 +278,18 @@ def main():
                         metavar='TYPE',
                         default='t1.micro',
                         help='instance type TYPE [default: %default]')
+    parser.add_option('--timeout',
+                        dest='timeout',
+                        type='int',
+                        metavar='TIMEOUT',
+                        default=WAIT_TIMEOUT,
+                        help='wait TIMEOUT seconds for instances')
+    parser.add_option('--poll',
+                        dest='poll',
+                        type='int',
+                        metavar='POLL',
+                        default=WAIT_POLL,
+                        help='poll instances for updates every POLL seconds')
     ss_group = optparse.OptionGroup(parser, 'Startup script options')
     ss_group.add_option('-n', '--name',
                         dest='name',
@@ -286,22 +307,17 @@ def main():
                         default='',
                         help='commandline options')
     parser.add_option_group(ss_group)
-    
     (options, args) = parser.parse_args()
-    kwargs = {
-        'name': options.name,
-        'gateway': options.gateway,
-        'options': options.options,
-    }
+    opts_dict = vars(options)
     if options.terminate:
-        terminate(options.region, **kwargs)
+        terminate(**opts_dict)
     elif options.list:
-        print_hosts(options.region, **kwargs)
+        print_hosts(**opts_dict)
     elif options.status:
-        print_status(options.region, **kwargs)
+        print_status(**opts_dict)
     else:
         try:
-            run(options.region, options.count, options.type, **kwargs)
+            run(**opts_dict)
         except ValueError as msg:
             print('Error: {0}'.format(msg))
 
