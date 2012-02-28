@@ -352,7 +352,7 @@ case "$APP_NAME" in
 
     echo "#!/bin/sh" > /home/ubuntu/startApp.sh
     echo ""          >> /home/ubuntu/startApp.sh
-    echo "vlc -I dummy --plan-and-exit --no-video $APP_PARAMS" >> /home/ubuntu/startApp.sh
+    echo "vlc -I dummy --play-and-exit --no-video $APP_PARAMS" >> /home/ubuntu/startApp.sh
     echo ""
 
     chmod 755 /home/ubuntu/startApp.sh
