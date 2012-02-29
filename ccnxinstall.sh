@@ -332,7 +332,7 @@ case "$APP_NAME" in
     echo ""          >> /home/ubuntu/startApp.sh
     echo "export CCNX_USER_NAME=$CCNX_USER_NAME"    >> /home/ubuntu/startApp.sh
     echo "/home/ubuntu/chat_read.sh $CHAT_FILE | /usr/local/bin/ccnchat -text $APP_PARAMS" >> /home/ubuntu/startApp.sh
-    echo ""
+    echo "" >> /home/ubuntu/startApp.sh
 
     cd /root/NDN_GEC/robochat
     cp $CHAT_FILE /home/ubuntu
@@ -350,10 +350,13 @@ case "$APP_NAME" in
     foundapp=1
     vlc -I dummy --play-and-exit --no-video $APP_PARAMS
 
-    echo "#!/bin/sh" > /home/ubuntu/startApp.sh
+    echo "#!/bin/bash" > /home/ubuntu/startApp.sh
     echo ""          >> /home/ubuntu/startApp.sh
-    echo "vlc -I dummy --plan-and-exit --no-video $APP_PARAMS" >> /home/ubuntu/startApp.sh
-    echo ""
+    echo "while true" >> /home/ubuntu/startApp.sh
+    echo "do" >> /home/ubuntu/startApp.sh
+    echo "vlc -I dummy --play-and-exit --no-video $APP_PARAMS >& /home/ubuntu/vlc.log " >> /home/ubuntu/startApp.sh
+    echo "done" >> /home/ubuntu/startApp.sh
+    echo "" >> /home/ubuntu/startApp.sh
 
     chmod 755 /home/ubuntu/startApp.sh
     chown ubuntu.ubuntu /home/ubuntu/startApp.sh
