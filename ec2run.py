@@ -11,6 +11,7 @@
 #
 
 import sys
+import logging
 from boto import ec2
 from time import sleep, time
 from os import environ
@@ -147,13 +148,14 @@ def _wait_for_instances(instances, state=u'running', **kwargs):
         poll: poll instances every poll seconds
         timeout: stop polling after timeout seconds
     """
-    # wait for 'running'
-    n = len(instances)
     poll = kwargs.get('poll', WAIT_POLL)
     timeout = kwargs.get('timeout', WAIT_TIMEOUT)
     start_time = time()
+    n = len(instances)
+    m = 0
     while True:
         if (time() - start_time) > timeout:
+            logging.error('Timeout occurred, {0}/{1} done'.format(m, n))
             break
         sys.stdout.write('.')
         sys.stdout.flush()
