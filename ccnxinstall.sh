@@ -350,11 +350,11 @@ case "$APP_NAME" in
     foundapp=1
     vlc -I dummy --play-and-exit --no-video $APP_PARAMS
 
-    echo "#!/bin/sh" > /home/ubuntu/startApp.sh
+    echo "#!/bin/bash" > /home/ubuntu/startApp.sh
     echo ""          >> /home/ubuntu/startApp.sh
     echo "while true" >> /home/ubuntu/startApp.sh
     echo "do" >> /home/ubuntu/startApp.sh
-    echo "vlc -I dummy --play-and-exit --no-video $APP_PARAMS" >> /home/ubuntu/startApp.sh
+    echo "vlc -I dummy --play-and-exit --no-video $APP_PARAMS >& /home/ubuntu/vlc.log " >> /home/ubuntu/startApp.sh
     echo "done" >> /home/ubuntu/startApp.sh
     echo "" >> /home/ubuntu/startApp.sh
 
