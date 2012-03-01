@@ -1,16 +1,47 @@
 #!/usr/bin/env python
 #
-# This script allows users to manage EC2 instances.
+# Copyright (c) 2011 Shakir James and Washington University in St. Louis.
+# All rights reserved
 #
-# Assumes environment variables are set: 
-#   AWS_ACCESS_KEY_ID:  AWS Access Key ID
-#   AWS_SECRET_ACCESS_KEY:  AWS Secret Access Key
+#  Redistribution and use in source and binary forms, with or without
+#  modification, are permitted provided that the following conditions
+#  are met:
+#    1. Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#    2. Redistributions in binary form must reproduce the above copyright
+#       notice, this list of conditions and the following disclaimer in the
+#       documentation and/or other materials provided with the distribution.
+#    3. The name of the author or Washington University may not be used 
+#       to endorse or promote products derived from this source code 
+#       without specific prior written permission.
+#    4. Conditions of any other entities that contributed to this are also
+#       met. If a copyright notice is present from another entity, it must
+#       be maintained in redistributions of the source code.
 #
-# Copyright 2011 Shakir James and Washington University in St. Louis.
-# See LICENSE for details.
+# THIS INTELLECTUAL PROPERTY (WHICH MAY INCLUDE BUT IS NOT LIMITED TO SOFTWARE,
+# FIRMWARE, VHDL, etc) IS PROVIDED BY THE AUTHOR AND WASHINGTON UNIVERSITY 
+# ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED 
+# TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
+# PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR WASHINGTON UNIVERSITY 
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+# ARISING IN ANY WAY OUT OF THE USE OF THIS INTELLECTUAL PROPERTY, EVEN IF 
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+"""This script allows users to manage EC2 instances.
+
+Assumes environment variables are set: 
+  AWS_ACCESS_KEY_ID:  AWS Access Key ID
+  AWS_SECRET_ACCESS_KEY:  AWS Secret Access Key
+"""
+__author__ = "Shakir James"
+
 import sys
+import logging
 from boto import ec2
 from time import sleep, time
 from os import environ
@@ -147,13 +178,14 @@ def _wait_for_instances(instances, state=u'running', **kwargs):
         poll: poll instances every poll seconds
         timeout: stop polling after timeout seconds
     """
-    # wait for 'running'
-    n = len(instances)
     poll = kwargs.get('poll', WAIT_POLL)
     timeout = kwargs.get('timeout', WAIT_TIMEOUT)
     start_time = time()
+    n = len(instances)
+    m = 0
     while True:
         if (time() - start_time) > timeout:
+            logging.error('Timeout occurred, {0}/{1} done'.format(m, n))
             break
         sys.stdout.write('.')
         sys.stdout.flush()
