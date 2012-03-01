@@ -345,16 +345,42 @@ case "$APP_NAME" in
     chown ubuntu.ubuntu /home/ubuntu/startApp.sh
 
     ;;
-"vlc")
-    echo "APP: vlc"
+"fetch")
+    echo "APP: fetch"
     foundapp=1
-    vlc -I dummy --play-and-exit --no-video $APP_PARAMS
+
+    cp -p /root/NDN_GEC/ccnx/csrc/cmd/ccn_fetch_test /usr/local/bin
 
     echo "#!/bin/bash" > /home/ubuntu/startApp.sh
     echo ""          >> /home/ubuntu/startApp.sh
+    echo "if [ $# -ne 1 ] " >> /home/ubuntu/startApp.sh
+    echo "then" >> /home/ubuntu/startApp.sh
+    echo "  fetchfile=$1" >> /home/ubuntu/startApp.sh
+    echo "else" >> /home/ubuntu/startApp.sh
+    echo "  fetchfile=$APP_PARAMS" >> /home/ubuntu/startApp.sh
+    echo "fi" >> /home/ubuntu/startApp.sh
+    echo "/usr/local/bin/ccn_fetch_test -mb 24 -out /tmp/fetchfile.out $fetchfile >& /home/ubuntu/fetch.log " >> /home/ubuntu/startApp.sh
+    echo "" >> /home/ubuntu/startApp.sh
+
+    chmod 755 /home/ubuntu/startApp.sh
+    chown ubuntu.ubuntu /home/ubuntu/startApp.sh
+    ;;
+"vlc")
+    echo "APP: vlc"
+    foundapp=1
+    #vlc -I dummy --play-and-exit --no-video $APP_PARAMS
+
+    echo "#!/bin/bash" > /home/ubuntu/startApp.sh
+    echo ""          >> /home/ubuntu/startApp.sh
+    echo "if [ $# -ne 1 ] " >> /home/ubuntu/startApp.sh
+    echo "then" >> /home/ubuntu/startApp.sh
+    echo "  videofile=$1" >> /home/ubuntu/startApp.sh
+    echo "else" >> /home/ubuntu/startApp.sh
+    echo "  videofile=$APP_PARAMS" >> /home/ubuntu/startApp.sh
+    echo "fi" >> /home/ubuntu/startApp.sh
     echo "while true" >> /home/ubuntu/startApp.sh
     echo "do" >> /home/ubuntu/startApp.sh
-    echo "vlc -I dummy --play-and-exit --no-video $APP_PARAMS >& /home/ubuntu/vlc.log " >> /home/ubuntu/startApp.sh
+    echo "vlc -I dummy --play-and-exit --no-video $videofile >& /home/ubuntu/vlc.log " >> /home/ubuntu/startApp.sh
     echo "done" >> /home/ubuntu/startApp.sh
     echo "" >> /home/ubuntu/startApp.sh
 
