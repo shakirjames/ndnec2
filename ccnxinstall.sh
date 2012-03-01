@@ -375,7 +375,7 @@ case "$APP_NAME" in
 
     echo "#!/bin/bash" > /home/ubuntu/startApp.sh
     echo ""          >> /home/ubuntu/startApp.sh
-    echo 'if [ $# -ne 1 ] ' >> /home/ubuntu/startApp.sh
+    echo 'if [ $# -eq 1 ] ' >> /home/ubuntu/startApp.sh
     echo "then" >> /home/ubuntu/startApp.sh
     echo "  fetchfile=\$1" >> /home/ubuntu/startApp.sh
     echo "else" >> /home/ubuntu/startApp.sh
