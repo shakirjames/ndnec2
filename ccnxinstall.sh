@@ -375,13 +375,13 @@ case "$APP_NAME" in
 
     echo "#!/bin/bash" > /home/ubuntu/startApp.sh
     echo ""          >> /home/ubuntu/startApp.sh
-    echo "if [ $# -ne 1 ] " >> /home/ubuntu/startApp.sh
+    echo 'if [ $# -ne 1 ] ' >> /home/ubuntu/startApp.sh
     echo "then" >> /home/ubuntu/startApp.sh
-    echo "  fetchfile=$1" >> /home/ubuntu/startApp.sh
+    echo "  fetchfile=\$1" >> /home/ubuntu/startApp.sh
     echo "else" >> /home/ubuntu/startApp.sh
     echo "  fetchfile=$APP_PARAMS" >> /home/ubuntu/startApp.sh
     echo "fi" >> /home/ubuntu/startApp.sh
-    echo "/usr/local/bin/ccn_fetch_test -mb 24 -out /tmp/fetchfile.out $fetchfile >& /home/ubuntu/fetch.log " >> /home/ubuntu/startApp.sh
+    echo '/usr/local/bin/ccn_fetch_test -mb 24 -out /tmp/fetchfile.out $fetchfile >& /home/ubuntu/fetch.log ' >> /home/ubuntu/startApp.sh
     echo "" >> /home/ubuntu/startApp.sh
 
     chmod 755 /home/ubuntu/startApp.sh
