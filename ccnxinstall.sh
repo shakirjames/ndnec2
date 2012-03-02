@@ -394,15 +394,15 @@ case "$APP_NAME" in
 
     echo "#!/bin/bash" > /home/ubuntu/startApp.sh
     echo ""          >> /home/ubuntu/startApp.sh
-    echo "if [ $# -ne 1 ] " >> /home/ubuntu/startApp.sh
+    echo 'if [ $# -ne 1 ] ' >> /home/ubuntu/startApp.sh
     echo "then" >> /home/ubuntu/startApp.sh
-    echo "  videofile=$1" >> /home/ubuntu/startApp.sh
+    echo '  videofile=$1' >> /home/ubuntu/startApp.sh
     echo "else" >> /home/ubuntu/startApp.sh
     echo "  videofile=$APP_PARAMS" >> /home/ubuntu/startApp.sh
     echo "fi" >> /home/ubuntu/startApp.sh
     echo "while true" >> /home/ubuntu/startApp.sh
     echo "do" >> /home/ubuntu/startApp.sh
-    echo "vlc -I dummy --play-and-exit --no-video $videofile >& /home/ubuntu/vlc.log " >> /home/ubuntu/startApp.sh
+    echo 'vlc -I dummy --play-and-exit --no-video $videofile >& /home/ubuntu/vlc.log ' >> /home/ubuntu/startApp.sh
     echo "done" >> /home/ubuntu/startApp.sh
     echo "" >> /home/ubuntu/startApp.sh
 
