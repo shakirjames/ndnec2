@@ -427,10 +427,10 @@ case "$APP_NAME" in
     fi
 
     cd /root
-    mkdir VIDEOS
+    #mkdir VIDEOS
     cd VIDEOS
-    wget http://www.arl.wustl.edu/~jdd/NDN/videos.tgz
-    tar -zxf videos.tgz
+    #wget http://www.arl.wustl.edu/~jdd/NDN/videos.tgz
+    #tar -zxf videos.tgz
 
     FILES=`ls *.mpeg *.mpg`
 
