@@ -390,6 +390,12 @@ case "$APP_NAME" in
 "vlc")
     echo "APP: vlc"
     foundapp=1
+
+    cd /root/NDN_GEC/ccnx/apps/vlc
+    cp -p Makefile.Linux Makefile
+    make
+    make install
+
     #vlc -I dummy --play-and-exit --no-video $APP_PARAMS
 
     echo "#!/bin/bash" > /home/ubuntu/startApp.sh
