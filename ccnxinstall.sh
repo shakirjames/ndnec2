@@ -392,6 +392,9 @@ case "$APP_NAME" in
     foundapp=1
 
     cd /root/NDN_GEC/ccnx/apps/vlc
+    wget http://www.arl.wustl.edu/~jdd/NDN/ccn.c.with_fetch .
+    mv ccn.c ccn.c.ORIG
+    cp ccn.c.with_fetch ccn.c
     cp -p Makefile.Linux Makefile
     make
     make install
