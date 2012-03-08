@@ -399,6 +399,9 @@ case "$APP_NAME" in
     make
     make install
 
+    cd /root/NDN_GEC/ccnx/csrc/cmd
+    cp -p ccn_fetch_test /usr/local/bin
+
     #vlc -I dummy --play-and-exit --no-video $APP_PARAMS
 
     echo "#!/bin/bash" > /home/ubuntu/startApp.sh
